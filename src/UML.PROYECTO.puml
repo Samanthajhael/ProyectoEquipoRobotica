@@ -1,0 +1,89 @@
+
+@startuml
+
+class Usuario {
+  -String username
+  -String password
+  -String rol
+  +getUsername(): String
+  +getPassword(): String
+  +getRol(): String
+}
+
+class Participante {
+  -int id
+  -String nombreCompleto
+  -int edad
+  -String rol
+  -int idEquipo
+  +getNombreCompleto(): String
+  +getEdad(): int
+  +getRol(): String
+  +getIdEquipo(): int
+}
+
+class Equipo {
+  -int id
+  -String nombre
+  -int categoriaId
+  -int puntaje
+  -String resultado
+  +getNombre(): String
+  +getPuntaje(): int
+  +getResultado(): String
+}
+
+
+class UsuarioBase {
+  +login(String, String): Usuario
+}
+
+class GestionParticipantes {
+  +guardarParticipante(Participante): void
+  +modificarParticipante(Participante): void
+  +borrarParticipante(int): void
+  +obtenerTodosLosParticipantes(): List
+}
+
+class GestionEquipos {
+  +guardarEquipo(Equipo): void
+  +modificarEquipo(Equipo): void
+  +obtenerTodosLosEquipos(): List
+  +cambiarPuntaje(int, int, String): void
+}
+
+' Interfaces gráficas
+class LoginInterface {
+  +LoginInterface()
+  -login(): void
+}
+
+class ParticipantesCRUDInterface {
+  +ParticipantesCRUDInterface()
+  -agregarParticipante(): void
+  -editarParticipante(): void
+  -eliminarParticipante(): void
+}
+
+class JuradoInterface {
+  +JuradoInterface()
+  -actualizarPuntaje(): void
+  -cargarEquipos(): void
+}
+
+LoginInterface --> UsuarioBase
+LoginInterface --> ParticipantesCRUDInterface
+LoginInterface --> JuradoInterface
+
+UsuarioBase --> Usuario
+
+GestionParticipantes --> Participante
+
+GestionEquipos --> Equipo
+
+ParticipantesCRUDInterface --> GestionParticipantes
+JuradoInterface --> GestionEquipos
+
+Participante --> Equipo
+
+@enduml
