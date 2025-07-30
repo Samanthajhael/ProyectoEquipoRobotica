@@ -95,7 +95,7 @@ public class LoginInterface extends JFrame {
             }
         });
 
-        // Enter key para login
+
         getRootPane().setDefaultButton(btnLogin);
 
         add(mainPanel);
